@@ -26,7 +26,7 @@ app.post("/",(req,res)=>{
 
 app.use(express.static(__dirname + "/public"))
 
-app.get("/ivan",(req,res)=>{
+app.get("/chat",(req,res)=>{
     res.sendFile(__dirname + "/public/index.html")
 })
 
