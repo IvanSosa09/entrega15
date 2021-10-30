@@ -4,6 +4,7 @@ const knex = require("./db");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server)
+// const knex = require("./knexfile");
 
 
 app.use(express.json())
@@ -24,6 +25,22 @@ app.post("/",(req,res)=>{
     .catch(res.send({msj:"error al agregar producto"}))
 })
 
+
+//KNEX CON SQLITE3
+// app.post("/",(req,res)=>{
+//     let obj = {
+//         name:req.body.name,
+//         email: req.body.email,
+//         mensaje: req.body.mensaje
+//     }
+//     knex("usermsj")
+//     .insert(obj)
+//     .then(res.send({msj:"producto agregado con exito!"}))
+//     .catch(res.send({msj:"error al agregar producto"}))
+// })
+
+
+
 app.use(express.static(__dirname + "/public"))
 
 app.get("/chat",(req,res)=>{
@@ -42,6 +59,7 @@ io.on("connection",(socket)=>{
     socket.on("informacion",(data)=>{
         mensajes.push(data)
         // console.log(data)
+    
     })
 
     io.sockets.emit("send-info",mensajes);
